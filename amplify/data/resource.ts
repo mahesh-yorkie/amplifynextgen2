@@ -10,6 +10,9 @@ const schema = a.schema({
   Todo: a
     .model({
       content: a.string(),
+      email:a.string(),
+      name:a.string(),
+      phone:a.string(),
     })
     .authorization((allow) => [allow.guest()]),
 });

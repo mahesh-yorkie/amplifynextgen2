@@ -9,10 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-amplify/ui-react": "^6.1.12",
     "apexcharts": "^3.45.2",
     "aws-amplify": "^6.3.8",
     "flatpickr": "^4.6.13",
+    "js-cookie": "^3.0.5",
     "jsvectormap": "^1.6.0",
+    "lucia": "^3.2.0",
     "next": "14.1.0",
     "react": "^18",
     "react-apexcharts": "^1.4.1",

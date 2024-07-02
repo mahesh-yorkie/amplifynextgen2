@@ -14,7 +14,7 @@ import { signIn } from 'aws-amplify/auth'
 //   description: "This is Next.js Signin Page TailAdmin Dashboard Template",
 // };
 
-const SignIna: React.FC = () => {
+const changepassword: React.FC = () => {
 
 
 const [formData, setFormData] = useState({
@@ -305,4 +305,4 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
   );
 };
 
-export default SignIna;
+export default changepassword;

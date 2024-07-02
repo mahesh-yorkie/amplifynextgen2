@@ -6,7 +6,7 @@ import "@/css/style.css";
 import React, { useEffect, useState } from "react";
 import Loader from "@/components/common/Loader";
 import { Amplify } from "aws-amplify";
-import Amplifyconfig from "../../amplify_outputs.json";
+import Amplifyconfig from "../amplify_outputs.json";
 Amplify.configure(Amplifyconfig);
 
 export default function RootLayout({

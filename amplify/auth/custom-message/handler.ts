@@ -2,7 +2,8 @@ import type { CustomMessageTriggerHandler } from "aws-lambda";
 
 export const handler: CustomMessageTriggerHandler = async (event) => {
 	console.log(event)
-	let ENVIROMENT = process.env.ENV;
+	const ENVIRONMENT: string | undefined = process.env.ENV;
+
 	let REDIRECTURL = "http://localhost:3007/";
 	if (ENVIROMENT == "dev") {
 		//REDIRECTURL = "http://localhost:3007/auth/reset-password"
@@ -32,7 +33,7 @@ export const handler: CustomMessageTriggerHandler = async (event) => {
         const url = `${redirectUrl}&data=${payload}&code=${codeParameter}`;
         const message = `We received a request to reset your password for your [Your App Name] account. If you didn't make this request, please ignore this email.To reset your password, click the link below. \n ${url}`;
         event.response.smsMessage = message;
-        event.response.emailSubject = process.env.EMAILSUBJECT;
+        event.response.emailSubject = "Reset Your Password for CurrentPools";
         event.response.emailMessage = message;
         console.log("event.response", event.response);
     }

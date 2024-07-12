@@ -7,7 +7,7 @@ import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import { Metadata } from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 
-import { signIn } from 'aws-amplify/auth'
+import { signIn ,confirmSignIn} from 'aws-amplify/auth'
 
 // export const metadata: Metadata = {
 //   title: "Next.js SignIn Page | TailAdmin - Next.js Dashboard Template",
@@ -48,12 +48,9 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 
     if (newPassword) {
       // Update password with completeNewPassword
-        const updatedUser = await confirmSignIn(
-          user,
-          newPassword
-        );
+        const updatedUser = await confirmSignIn({challengeResponse:newPassword});
         console.log(updatedUser); // User successfully signed in
-        router.push('/')
+        //router.push('/')
     } else {
       console.error('New password is required');
     }
@@ -267,7 +264,7 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
                       onChange={handleChange}
                       type="password"
                       placeholder="6+ Characters, 1 Capital letter"
-                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-white outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10  outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     />
 
                     <span className="absolute right-4 top-4">

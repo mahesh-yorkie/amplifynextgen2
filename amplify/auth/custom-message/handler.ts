@@ -45,7 +45,7 @@ export const handler: CustomMessageTriggerHandler = async (event) => {
         const message = `<h5>Welcome to CurrentPools.</h5> Your email is ${event.request.usernameParameter}. Your temporary password is ${event.request.codeParameter} \n  <a href='${url}'>click to login</a>`;
         event.response.smsMessage = message;
         event.response.emailMessage = message;
-        event.response.emailSubject = "Welcome to CurrentPools";
+        event.response.emailSubject = "Welcome to CurrentPools gen2";
     }
 
   	return event;

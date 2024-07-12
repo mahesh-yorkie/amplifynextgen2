@@ -41,6 +41,22 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
       password: formData.password,
     })
      console.log("user,",user)
+
+
+    console.log("user,", user)
+    const newPassword = prompt('Please enter a new password: ');
+
+    if (newPassword) {
+      // Update password with completeNewPassword
+        const updatedUser = await Auth.completeNewPassword(
+          user,
+          newPassword
+        );
+        console.log(updatedUser); // User successfully signed in
+        router.push('/')
+    } else {
+      console.error('New password is required');
+    }
   } catch (error) {
     console.error('Error:', error);
   }

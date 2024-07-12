@@ -5,11 +5,11 @@ export const handler: CustomMessageTriggerHandler = async (event) => {
 	const ENVIRONMENT: string | undefined = process.env.ENV;
 
 	let REDIRECTURL = "http://localhost:3007/";
-	if (ENVIROMENT == "dev") {
+	if (ENVIRONMENT == "dev") {
 		//REDIRECTURL = "http://localhost:3007/auth/reset-password"
-	} else if (ENVIROMENT == "stage") {
+	} else if (ENVIRONMENT == "stage") {
 		///REDIRECTURL = ""
-	} else if (ENVIROMENT == "prod") {
+	} else if (ENVIRONMENT == "prod") {
 		//REDIRECTURL = ""
 	}
 

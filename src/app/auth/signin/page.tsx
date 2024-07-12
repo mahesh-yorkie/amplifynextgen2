@@ -48,7 +48,7 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 
     if (newPassword) {
       // Update password with completeNewPassword
-        const updatedUser = await Auth.completeNewPassword(
+        const updatedUser = await confirmSignIn(
           user,
           newPassword
         );

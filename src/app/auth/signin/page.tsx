@@ -17,10 +17,10 @@ import { signIn } from 'aws-amplify/auth'
 const SignIna: React.FC = () => {
 
 
-const [formData, setFormData] = useState({
-  email: '',
-  password: '',
-});
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
 
 const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
   const { name, value } = e.target;

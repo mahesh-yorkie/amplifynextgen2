@@ -31,7 +31,7 @@ export const handler: CustomMessageTriggerHandler = async (event) => {
         ).toString("base64");
 
         const url = `${redirectUrl}&data=${payload}&code=${codeParameter}`;
-        const message = `We received a request to reset your password for your [Your App Name] account. If you didn't make this request, please ignore this email.To reset your password, click the link below. \n ${url}`;
+        const message = `We received a request to reset your password for your CurrentPools account. If you didn't make this request, please ignore this email.To reset your password, click the link below. \n ${url}`;
         event.response.smsMessage = message;
         event.response.emailSubject = "Reset Your Password for CurrentPools";
         event.response.emailMessage = message;

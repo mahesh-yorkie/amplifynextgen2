@@ -16,9 +16,9 @@ const schema = a.schema({
     })
     .authorization((allow) => [allow.guest()]),
     Company: a.model({
-      id: a.id().required(),
+      id: a.id(),
       logo: a.string(),
-      name: a.string().required(),
+      name: a.string(),
       description: a.string(),
       address: a.string(),
       phone: a.string(),

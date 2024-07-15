@@ -12,6 +12,7 @@ import { CityModel }     from './City.model'
 import { PoolServiceModel }     from './PoolService.model'
 import { PoolServiceLocationModel }     from './PoolServiceLocation.model'
 
+import { addAdminUser } from "./resource"
 /*== STEP 1 ===============================================================
 The section below creates a Todo database table with a "content" field. Try
 adding a new "isDone" field as a boolean. The authorization rule below
@@ -31,6 +32,17 @@ const schema = a.schema({
   City                :   CityModel,
   PoolService         :   PoolServiceModel,
   PoolServiceLocation :   PoolServiceLocationModel,
+  addAdminUser: a
+    .mutation()
+    .arguments({
+      email: a.string().required(),
+      groupList: a.string().array(),
+
+    })
+    //.authorization((allow) => [allow.group("ADMINS")])
+    .authorization(allow => [allow.guest()]),
+    .handler(a.handler.function(addAdminUser))
+    .returns(a.json())
 });
 
 export type Schema = ClientSchema<typeof schema>;

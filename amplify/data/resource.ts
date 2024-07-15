@@ -23,10 +23,7 @@ const schema = a.schema({
         PoolServiceLocation:a.hasMany('PoolServiceLocation', 'companyId'),
         isActive: a.boolean().default(true),
         activationDate: a.time()
-    }).authorization((allow) => [
-      allow.publicApiKey().to(["create"]),
-      allow.authenticated(),
-    ]),
+    }),
    
     PlanFeature:a.model({
       id:a.id().required(),
@@ -34,10 +31,7 @@ const schema = a.schema({
       description:a.string(),
       slug:a.string().required(),
       subscription :a.hasMany('PlanFeatureSubscriptionPlan','PlanFeatureId')
-    }).authorization((allow) => [
-      allow.publicApiKey().to(["create"]),
-      allow.authenticated(),
-    ]),
+    }),
     SubscriptionPlan:a.model({
       id:a.id().required(),
       title:a.string().required(),
@@ -47,20 +41,14 @@ const schema = a.schema({
       type: a.enum(['BASIC','ESSENTIAL','PREMIUM']),
       isActive:a.boolean().default(true),
       features:a.hasMany('PlanFeatureSubscriptionPlan', 'SubscriptionPlanId') 
-    }).authorization((allow) => [
-      allow.publicApiKey().to(["create"]),
-      allow.authenticated(),
-    ]),
+    }),
     PlanFeatureSubscriptionPlan:a.model({
       id:a.id().required(),
       SubscriptionPlanId:a.id().required(),
       PlanFeatureId:a.id().required(),
       subscriptionplan:a.belongsTo('SubscriptionPlan','SubscriptionPlanId'),
       planfeature:a.belongsTo('PlanFeature','PlanFeatureId')
-    }).authorization((allow) => [
-      allow.publicApiKey().to(["create"]),
-      allow.authenticated(),
-    ]),
+    }),
     User:a.model({
       id:a.id().required(),
       companyID:a.id().required(),
@@ -84,10 +72,7 @@ const schema = a.schema({
       cognitoUserStatus:a.enum(['CONFIRMED', 'RESET_REQUIRED']),
       isActive:a.boolean().default(true),
       activationDate:a.time()
-    }).authorization((allow) => [
-      allow.publicApiKey().to(["create"]),
-      allow.authenticated(),
-    ]),
+    }),
     UserSubscriptionHistory:a.model({
       id:a.id().required(),
       userID:a.id().required(),
@@ -97,10 +82,7 @@ const schema = a.schema({
       amount:a.float().required(),
       startDate:a.time(),
       endDate:a.time()
-    }).authorization((allow) => [
-      allow.publicApiKey().to(["create"]),
-      allow.authenticated(),
-    ]),
+    }),
     UserNotification:a.model({
       id:a.id().required(),
       title:a.string(),
@@ -111,20 +93,14 @@ const schema = a.schema({
       isRead:a.boolean().default(false),
       readAt:a.time(),
       createdBy:a.id()
-    }).authorization((allow) => [
-      allow.publicApiKey().to(["create"]),
-      allow.authenticated(),
-    ]),
+    }),
     Country:a.model({
       id:a.id().required(),
       name:a.string().required(),
       state:a.hasMany('State', 'countryID'),
       PoolServiceLocation:a.hasMany('PoolServiceLocation', 'countryID'),
       isActive:a.boolean().default(true)
-    }).authorization((allow) => [
-      allow.publicApiKey().to(["create"]),
-      allow.authenticated(),
-    ]),
+    }),
     State:a.model({
       id:a.id().required(),
       name:a.string().required(),
@@ -133,10 +109,7 @@ const schema = a.schema({
       city:a.hasMany('City', 'stateID'),
       PoolServiceLocation:a.hasMany('PoolServiceLocation', 'stateID'),
       isActive:a.boolean().default(true)
-    }).authorization((allow) => [
-      allow.publicApiKey().to(["create"]),
-      allow.authenticated(),
-    ]),
+    }),
     City:a.model({
       id:a.id().required(),
       name:a.string().required(),
@@ -144,10 +117,7 @@ const schema = a.schema({
       state:a.belongsTo('State', 'stateID'),
       PoolServiceLocation:a.hasMany('PoolServiceLocation', 'cityID'),
       isActive:a.boolean().default(true)
-    }).authorization((allow) => [
-      allow.publicApiKey().to(["create"]),
-      allow.authenticated(),
-    ]),
+    }),
     PoolService:a.model({
       id:a.id().required(),
       companyID:a.id().required(),
@@ -156,10 +126,7 @@ const schema = a.schema({
       description:a.string(),
       price:a.float(),
       isActive:a.boolean().default(true)
-    }).authorization((allow) => [
-      allow.publicApiKey().to(["create"]),
-      allow.authenticated(),
-    ]),
+    }),
     PoolServiceLocation:a.model({
       id:a.id().required(),
       companyID:a.id().required(),
@@ -171,19 +138,13 @@ const schema = a.schema({
       cityID:a.id().required(),
       city:a.belongsTo('City', 'cityID'),
       isActive:a.boolean().default(true)
-    }).authorization((allow) => [
-      allow.publicApiKey().to(["create"]),
-      allow.authenticated(),
-    ]),
+    }),
     HelpSupport:a.model({
       id:a.id().required(),
       title:a.string().required(),
       description:a.string().required(),
       isActive:a.boolean().default(true)
-    }).authorization((allow) => [
-      allow.publicApiKey().to(["create"]),
-      allow.authenticated(),
-    ])
+    })
     
 });
 

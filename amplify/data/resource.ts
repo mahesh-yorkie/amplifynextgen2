@@ -18,7 +18,7 @@ const schema = a.schema({
     Company: a.model({
       id: a.id(),
       logo: a.string(),
-      name: a.string(),
+      name: a.string().required(),
       description: a.string(),
       address: a.string(),
       phone: a.string(),

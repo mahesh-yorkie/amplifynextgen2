@@ -32,7 +32,6 @@ const schema = a.schema({
       isActive: a.boolean().default(true),
       activationDate: a.time()
   }).authorization((allow) => [
-    allow.publicApiKey().to(["create"]),
     allow.authenticated(),
   ]),
 });

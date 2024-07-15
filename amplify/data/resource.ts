@@ -15,6 +15,26 @@ const schema = a.schema({
       phone:a.string(),
     })
     .authorization((allow) => [allow.guest()]),
+    Company: a.model({
+      id: a.id().required(),
+      logo: a.string(),
+      name: a.string().required(),
+      description: a.string(),
+      address: a.string(),
+      phone: a.string(),
+      email: a.string(),
+      website: a.string(),
+      businessLicense: a.string(),
+      termsAndConditions: a.string(),
+      //Users: a.hasMany('User', 'companyId'),//[User] @hasMany
+      //PoolService :a.hasMany('PoolService', 'companyId'),
+      //PoolServiceLocation:a.hasMany('PoolServiceLocation', 'companyId'),
+      isActive: a.boolean().default(true),
+      activationDate: a.time()
+  }).authorization((allow) => [
+    allow.publicApiKey().to(["create"]),
+    allow.authenticated(),
+  ]),
 });
 
 export type Schema = ClientSchema<typeof schema>;

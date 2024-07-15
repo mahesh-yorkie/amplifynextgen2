@@ -8,7 +8,8 @@ export const SubscriptionPlanModel = a.model({
     amount:a.float().required(),
     type: a.enum(['BASIC','ESSENTIAL','PREMIUM']),
     isActive:a.boolean().default(true),
-    features:a.hasMany('PlanFeatureSubscriptionPlan', 'SubscriptionPlanId') 
+    features:a.hasMany('PlanFeatureSubscriptionPlan', 'SubscriptionPlanId'),
+    UserHistory:a.hasMany('UserSubscriptionHistory', 'SubscriptionPlanId'),
 }).authorization((allow) => [
   allow.authenticated(),
 ])

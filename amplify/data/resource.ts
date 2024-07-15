@@ -164,23 +164,6 @@ const schema = a.schema({
       isActive:a.boolean().default(true)
     }).authorization((allow) => [
       allow.authenticated(),
-    ]),
-    Request:a.model({
-      id:a.id(),
-      companyID:a.id().required(),
-      company:a.belongsTo('Company', 'companyID'),
-      customerID:a.id().required(),
-      customer:a.belongsTo('User', 'customerID'),
-      title:a.string(),
-      address:a.string(),
-      description:a.string(),
-      preferredTime:a.enum(['ANYTIME', 'MORNING', 'AFTERNOON', 'EVENING']),
-      poolServiceList:a.string().array(),
-      stage:a.enum(['REQUEST', 'QUOTE', 'JOB', 'COMPLETED']),
-      quote:a.hasOne('Quote', 'requestID'),
-      isActive:a.boolean().default(true)
-    }).authorization((allow) => [
-      allow.authenticated(),
     ])
     
 });

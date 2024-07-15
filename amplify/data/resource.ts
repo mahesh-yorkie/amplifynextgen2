@@ -44,8 +44,8 @@ const schema = a.schema({
     ]),
     PlanFeatureSubscriptionPlan:a.model({
       id:a.id(),
-      SubscriptionPlanId:a.id().required(),
-      PlanFeatureId:a.id().required(),
+      SubscriptionPlanId:a.id(),
+      PlanFeatureId:a.id(),
       subscriptionplan:a.belongsTo('SubscriptionPlan','SubscriptionPlanId'),
       planfeature:a.belongsTo('PlanFeature','PlanFeatureId')
     }).authorization((allow) => [
@@ -53,7 +53,7 @@ const schema = a.schema({
     ]),
     User:a.model({
       id:a.id(),
-      companyID:a.id().required(),
+      companyID:a.id(),
       company:a.belongsTo('Company', 'companyID'),
       name:a.string(),
       email:a.required().string(),
@@ -79,9 +79,9 @@ const schema = a.schema({
     ]),
     UserSubscriptionHistory:a.model({
       id:a.id(),
-      userID:a.id().required(),
+      userID:a.id(),
       user:a.belongsTo('User', 'userID'),
-      subscriptionPlanID:a.id().required(),
+      subscriptionPlanID:a.id(),
       subscriptionPlan:a.belongsTo('SubscriptionPlan', 'subscriptionPlanID'),
       amount:a.float().required(),
       startDate:a.time(),
@@ -94,7 +94,7 @@ const schema = a.schema({
       title:a.string(),
       description:a.string(),
       type:a.enum(['BROADCAST', 'CONTRACT_SIGNED']),
-      userID:a.id().required(),
+      userID:a.id(),
       user:a.belongsTo('User', 'userID'),
       isRead:a.boolean().default(false),
       readAt:a.time(),
@@ -114,7 +114,7 @@ const schema = a.schema({
     State:a.model({
       id:a.id(),
       name:a.string().required(),
-      countryID:a.id().required(),
+      countryID:a.id(),
       country:a.belongsTo('Country', 'countryID'),
       city:a.hasMany('City', 'stateID'),
       PoolServiceLocation:a.hasMany('PoolServiceLocation', 'stateID'),
@@ -125,7 +125,7 @@ const schema = a.schema({
     City:a.model({
       id:a.id(),
       name:a.string().required(),
-      stateID:a.id().required(),
+      stateID:a.id(),
       state:a.belongsTo('State', 'stateID'),
       PoolServiceLocation:a.hasMany('PoolServiceLocation', 'cityID'),
       isActive:a.boolean().default(true)
@@ -134,7 +134,7 @@ const schema = a.schema({
     ]),
     PoolService:a.model({
       id:a.id(),
-      companyID:a.id().required(),
+      companyID:a.id(),
       company:a.belongsTo('Company', 'companyID'),
       name:a.string(),
       description:a.string(),
@@ -145,13 +145,13 @@ const schema = a.schema({
     ]),
     PoolServiceLocation:a.model({
       id:a.id(),
-      companyID:a.id().required(),
+      companyID:a.id(),
       company:a.belongsTo('Company', 'companyID'),
-      countryID:a.id().required(),
+      countryID:a.id(),
       country:a.belongsTo('Country', 'countryID'),
-      stateID:a.id().required(),
+      stateID:a.id(),
       state:a.belongsTo('State', 'stateID'),
-      cityID:a.id().required(),
+      cityID:a.id(),
       city:a.belongsTo('City', 'cityID'),
       isActive:a.boolean().default(true)
     }).authorization((allow) => [
@@ -167,9 +167,9 @@ const schema = a.schema({
     ]),
     Request:a.model({
       id:a.id(),
-      companyID:a.id().required(),
+      companyID:a.id(),
       company:a.belongsTo('Company', 'companyID'),
-      customerID:a.id().required(),
+      customerID:a.id(),
       customer:a.belongsTo('User', 'customerID'),
       title:a.string(),
       address:a.string(),

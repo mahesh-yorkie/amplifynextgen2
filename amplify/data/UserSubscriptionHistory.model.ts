@@ -4,8 +4,8 @@ export const UserSubscriptionHistoryModel = a.model({
     id:a.id(),
     userId:a.id().required(),
     user:a.belongsTo('User', 'userId'),
-    subscriptionPlanId:a.id().required(),
-    subscriptionPlan:a.belongsTo('SubscriptionPlan', 'subscriptionPlanId'),
+    SubscriptionPlanId:a.id().required(),
+    subscriptionPlan:a.belongsTo('SubscriptionPlan', 'SubscriptionPlanId'),
     amount:a.float().required(),
     startDate:a.time()
 }).authorization((allow) => [

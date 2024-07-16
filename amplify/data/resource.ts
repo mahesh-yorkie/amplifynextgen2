@@ -35,7 +35,7 @@ const schema = a.schema({
   crearteUser: a
     .query()
     .arguments({
-      name: a.string().default("World"),
+      name: a.string(),
     })
     .returns(a.string())
     .handler(a.handler.function(crearteUser))

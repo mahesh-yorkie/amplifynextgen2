@@ -32,14 +32,14 @@ const schema = a.schema({
   City                :   CityModel,
   PoolService         :   PoolServiceModel,
   PoolServiceLocation :   PoolServiceLocationModel,
-
   crearteUser: a
     .query()
     .arguments({
       name: a.string().default("World"),
     })
     .returns(a.string())
-    .handler(a.handler.function(crearteUser)),
+    .handler(a.handler.function(crearteUser))
+    .authorization(allow => [allow.guest()]),
   
 });
 

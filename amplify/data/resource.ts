@@ -40,7 +40,7 @@ const schema = a.schema({
     })
     .returns(a.string())
     .handler(a.handler.function(crearteUser))
-    .authorization(allow => [allow.guest(),allow.iam()]),
+    .authorization(allow => [allow.guest()]),
   
 });
 

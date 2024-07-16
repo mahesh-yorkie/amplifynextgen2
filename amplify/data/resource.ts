@@ -33,9 +33,10 @@ const schema = a.schema({
   PoolService         :   PoolServiceModel,
   PoolServiceLocation :   PoolServiceLocationModel,
   crearteUser: a
-    .query()
+    .mutation()
     .arguments({
       name: a.string(),
+      email : a.string()
     })
     .returns(a.string())
     .handler(a.handler.function(crearteUser))

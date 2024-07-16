@@ -40,7 +40,7 @@ const schema = a.schema({
     })
     .returns(a.string())
     .handler(a.handler.function(crearteUser))
-    .authorization(allow => [allow.guest()]),
+    .authorization(allow => [allow.authenticated()]),
   
 });
 
@@ -48,9 +48,12 @@ export type Schema = ClientSchema<typeof schema>;
 
 export const data = defineData({
   schema,
-  // authorizationModes: {
-  //   defaultAuthorizationMode: 'iam',
-  // },
+  authorizationModes: {
+    defaultAuthorizationMode: "apiKey",
+    apiKeyAuthorizationMode: {
+      expiresInDays: 30,
+    },
+  },
 });
 
 /*== STEP 2 ===============================================================

@@ -11,7 +11,8 @@ const client = new CognitoIdentityProviderClient({ region: env.AWS_REGION });
 
 export const handler: Handler = async (event) => {
   console.log("testing");
-  const { email, groupList } = event.arguments;
+  const { email, groupList } = event.arguments as { email: string; groupList: string[] };
+
 
   const argAdminCreateUser = {
     UserPoolId: env.AMPLIFY_AUTH_USERPOOL_ID,

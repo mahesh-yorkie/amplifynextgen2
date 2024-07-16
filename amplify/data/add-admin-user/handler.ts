@@ -32,7 +32,7 @@ export const handler: Handler = async (event) => {
   // };
 
   // const createUserCommand = new AdminCreateUserCommand(argAdminCreateUser);
-  // const response: { user?: any; groups?: any[] } = {};
+   const response: { user?: any; groups?: any[] } = {};
 
   // try {
   //   response.user = await client.send(createUserCommand);
@@ -52,5 +52,5 @@ export const handler: Handler = async (event) => {
   //   throw error;
   // }
 
-  //return response;
+  return response;
 };

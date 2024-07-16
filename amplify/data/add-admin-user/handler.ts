@@ -1,18 +1,18 @@
 import type { Schema } from "../resource";
-import { env } from "$amplify/env/add-admin-user";
-import {
-  AdminCreateUserCommand,
-  AdminAddUserToGroupCommand,
-  CognitoIdentityProviderClient,
-} from "@aws-sdk/client-cognito-identity-provider";
+//import { env } from "$amplify/env/add-admin-user";
+// import {
+//   AdminCreateUserCommand,
+//   AdminAddUserToGroupCommand,
+//   CognitoIdentityProviderClient,
+// } from "@aws-sdk/client-cognito-identity-provider";
 
 type Handler = Schema["addAdminUser"]["functionHandler"];
-const client = new CognitoIdentityProviderClient({ region: env.AWS_REGION });
+//const client = new CognitoIdentityProviderClient({ region: env.AWS_REGION });
 
 export const handler: Handler = async (event) => {
-  console.log("testing");
+  //console.log("testing",env);
   const { email, groupList } = event.arguments as { email: string; groupList: string[] };
-  
+
 
   // const argAdminCreateUser = {
   //   UserPoolId: env.AMPLIFY_AUTH_USERPOOL_ID,

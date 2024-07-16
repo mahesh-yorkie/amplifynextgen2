@@ -1,7 +1,7 @@
 import { defineAuth } from '@aws-amplify/backend';
 import { customMessage } from "./custom-message/resource";
 
-import { addAdminUser } from "../data/add-user/resource"
+import { addAdminUser } from "../data/add-admin-user/resource"
 
 /**
  * Define and configure your auth resource

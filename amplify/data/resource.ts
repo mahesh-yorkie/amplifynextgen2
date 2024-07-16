@@ -40,7 +40,7 @@ const schema = a.schema({
 
     })
     //.authorization((allow) => [allow.group("ADMINS")])
-    .authorization(allow => [allow.guest()]),
+    .authorization(allow => [allow.guest()])
     .handler(a.handler.function(addAdminUser))
     .returns(a.json())
 });

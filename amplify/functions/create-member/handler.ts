@@ -6,10 +6,10 @@ export const handler: Handler = async (event, context) => {
   // your function code goes here
   const email = event.argument.email
 
-  return{
+  return {
     status: 200,
-    message: `Hello,`,
-    data: event.argument
+    message: `Hello,` + secret('branch'),
+    data: event.argument,
   }
   
   // return JSON.stringify({

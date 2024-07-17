@@ -45,7 +45,8 @@ const schema = a.schema({
     })
     .returns(a.ref('responce'))
     .handler(a.handler.function(createMember))
-    .authorization(allow => [allow.authenticated()]),
+    .authorization(allow => [allow.guest()]),
+    //.authorization(allow => [allow.authenticated()]),
   
 });
 

@@ -8,10 +8,16 @@ export const handler: Handler = async (event, context) => {
       throw new Error('Email is not defined');
     }
 
-  return JSON.stringify({
-    statusCode: 200,
-    message: `Hello, ${env.API_ENDPOINT}!`,
-    name: event.arguments.name,
-  });
+    return {
+      status: 200,
+      message: `Hello, ${env.API_ENDPOINT}!`,
+      data: event.arguments
+    }
+
+  // return JSON.stringify({
+  //   statusCode: 200,
+  //   message: `Hello, ${env.API_ENDPOINT}!`,
+  //   name: event.arguments.name,
+  // });
   //return 'Hello, create user!' + process.env.AMPLIFY_BRANCH;
 };

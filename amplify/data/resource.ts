@@ -32,13 +32,18 @@ const schema = a.schema({
   City                :   CityModel,
   PoolService         :   PoolServiceModel,
   PoolServiceLocation :   PoolServiceLocationModel,
+  responce: a.model({
+    status: a.integer(),
+    message: a.string(),
+    data: a.string().array()
+  }),
   crearteUser: a
     .mutation()
     .arguments({
       name: a.string(),
       email : a.string()
     })
-    .returns(a.string())
+    .returns(a.ref('responce'))
     .handler(a.handler.function(crearteUser))
     .authorization(allow => [allow.authenticated()]),
   

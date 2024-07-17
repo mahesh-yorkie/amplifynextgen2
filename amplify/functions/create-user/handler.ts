@@ -5,7 +5,8 @@ export const handler: Handler = async (event, context) => {
 
   return JSON.stringify({
     statusCode: 200,
-    body: JSON.stringify({ message: 'Hello from Amplify!'+ process.env.AMPLIFY_BRANCH }),
+    message: 'Hello from Amplify!',
+    env: process.env,
   });
   //return 'Hello, create user!' + process.env.AMPLIFY_BRANCH;
 };

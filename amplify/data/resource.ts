@@ -33,20 +33,19 @@ const schema = a.schema({
   PoolService         :   PoolServiceModel,
   PoolServiceLocation :   PoolServiceLocationModel,
   responce: a.customType({
-    status: a.integer(),
-    message: a.string(),
-    data: a.string().array()
+    statusCode: a.integer(),
+    body: a.string(),
   }),
   crearteUser: a
     .mutation()
     .arguments({
       name: a.string(),
-      email : a.string()
+      email : a.string(),
+      user_pool_id : a.string(),
     })
     .returns(a.ref('responce'))
     .handler(a.handler.function(createMember))
-    .authorization(allow => [allow.guest()]),
-    //.authorization(allow => [allow.authenticated()]),
+    .authorization(allow => [allow.authenticated()]),
   
 });
 

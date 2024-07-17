@@ -1,5 +1,6 @@
 import { defineAuth } from '@aws-amplify/backend';
 import { customMessage } from "./custom-message/resource";
+import { createMember } from '../functions/create-member/resource';
 
 /**
  * Define and configure your auth resource
@@ -14,4 +15,7 @@ export const auth = defineAuth({
   triggers: {
     customMessage,
   },
+  access: (allow) => [
+    allow.resource(createMember).to(["manageUsers"])
+  ],
 });

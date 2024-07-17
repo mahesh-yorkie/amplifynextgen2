@@ -7,7 +7,7 @@ export const handler: Handler = async (event, context) => {
   return JSON.stringify({
     statusCode: 200,
     message: `Hello, ${env.API_ENDPOINT}!`,
-    env: process.env,
+    event: event,
   });
   //return 'Hello, create user!' + process.env.AMPLIFY_BRANCH;
 };

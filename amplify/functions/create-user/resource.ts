@@ -1,11 +1,11 @@
 import { defineFunction ,secret} from '@aws-amplify/backend';
 
 
-const API_ENDPOINT: string = process.env.ENV || 'default_endpoint';
+const API_ENDPOINT: string = process.env.ENV || 'dev';
 
 
 
-export const crearteUser = defineFunction({
+export const createUser = defineFunction({
   // optionally specify a name for the Function (defaults to directory name)
   name: 'create-user',
   // optionally specify a path to your handler (defaults to "./handler.ts")

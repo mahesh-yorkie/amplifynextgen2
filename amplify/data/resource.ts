@@ -11,7 +11,7 @@ import { StateModel }     from './State.model'
 import { CityModel }     from './City.model'
 import { PoolServiceModel }     from './PoolService.model'
 import { PoolServiceLocationModel }     from './PoolServiceLocation.model'
-import { crearteUser } from "../functions/create-user/resource"
+import { createUser } from "../functions/create-user/resource"
 
 /*== STEP 1 ===============================================================
 The section below creates a Todo database table with a "content" field. Try
@@ -44,7 +44,7 @@ const schema = a.schema({
       email : a.string()
     })
     .returns(a.string())
-    .handler(a.handler.function(crearteUser))
+    .handler(a.handler.function(createUser))
     .authorization(allow => [allow.authenticated()]),
   
 });

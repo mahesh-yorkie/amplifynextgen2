@@ -1,5 +1,6 @@
 import type { Handler } from 'aws-lambda';
-import { env } from '$amplify/env/create-user';
+import {secret} from '@aws-amplify/backend';
+//import { env } from '$amplify/env/create-member';
 
 export const handler: Handler = async (event, context) => {
   // your function code goes here
@@ -7,9 +8,10 @@ export const handler: Handler = async (event, context) => {
 
   return{
     status: 200,
-    message: `Hello, ${env.API_ENDPOINT}!`,
+    message: `Hello,`,
     data: event.argument
   }
+  
   // return JSON.stringify({
   //   statusCode: 200,
   //   message: `Hello, ${env.API_ENDPOINT}!`,

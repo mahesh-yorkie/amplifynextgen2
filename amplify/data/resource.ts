@@ -11,7 +11,7 @@ import { StateModel }     from './State.model'
 import { CityModel }     from './City.model'
 import { PoolServiceModel }     from './PoolService.model'
 import { PoolServiceLocationModel }     from './PoolServiceLocation.model'
-import { createUser } from "../functions/create-user/resource"
+import { createMember } from "../functions/create-member/resource"
 
 /*== STEP 1 ===============================================================
 The section below creates a Todo database table with a "content" field. Try
@@ -32,7 +32,7 @@ const schema = a.schema({
   City                :   CityModel,
   PoolService         :   PoolServiceModel,
   PoolServiceLocation :   PoolServiceLocationModel,
-  responce: a.model({
+  responce: a.customType({
     status: a.integer(),
     message: a.string(),
     data: a.string().array()
@@ -44,7 +44,7 @@ const schema = a.schema({
       email : a.string()
     })
     .returns(a.ref('responce'))
-    .handler(a.handler.function(createUser))
+    .handler(a.handler.function(createMember))
     .authorization(allow => [allow.authenticated()]),
   
 });

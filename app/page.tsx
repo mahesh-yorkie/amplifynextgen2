@@ -16,17 +16,17 @@ export default function Page() {
   const [errors, setErrors] = useState(null);      
   const handleLikePost = async () => {
   try {
-    const response = await client.mutations.crearteUser(
+    const response:any = await client.mutations.crearteUser(
       { name: 'hello' ,email:"viroyic609@stikezz.com" ,user_pool_id:awsExports.auth.user_pool_id}
     );
-    setData(response.data);
+    //setData(response.data);
     console.log(response.data)
     const myArr:any = JSON.parse(response.data.body);
     console.log("test",myArr)
-    setErrors(response.errors);
+    //setErrors(response.errors);
   } catch (error) {
     console.error("Error liking post:", error);
-    setErrors([error]);
+    //setErrors([error]);
   }
 };
 

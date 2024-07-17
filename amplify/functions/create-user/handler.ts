@@ -5,10 +5,15 @@ export const handler: Handler = async (event, context) => {
   // your function code goes here
   const email = event.argument.email
 
-  return JSON.stringify({
-    statusCode: 200,
+  return{
+    status: 200,
     message: `Hello, ${env.API_ENDPOINT}!`,
-    event: event,
-  });
+    data: event.argument
+  }
+  // return JSON.stringify({
+  //   statusCode: 200,
+  //   message: `Hello, ${env.API_ENDPOINT}!`,
+  //   event: event,
+  // });
   //return 'Hello, create user!' + process.env.AMPLIFY_BRANCH;
 };

@@ -43,7 +43,7 @@ const schema = a.schema({
       name: a.string(),
       email : a.string()
     })
-    .returns(a.string())
+    .returns(a.ref('responce'))
     .handler(a.handler.function(createUser))
     .authorization(allow => [allow.authenticated()]),
   

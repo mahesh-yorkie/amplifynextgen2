@@ -3,11 +3,15 @@ import { env } from '$amplify/env/create-user';
 
 export const handler: Handler = async (event, context) => {
   // your function code goes here
+    const email: string | null = event.argument.email;
+    if (email === null || email === undefined) {
+      throw new Error('Email is not defined');
+    }
 
   return JSON.stringify({
     statusCode: 200,
     message: `Hello, ${env.API_ENDPOINT}!`,
-    event: event,
+    name: event.arguments.name,
   });
   //return 'Hello, create user!' + process.env.AMPLIFY_BRANCH;
 };

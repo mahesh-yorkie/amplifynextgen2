@@ -5,6 +5,7 @@ import awsExports from '../amplify_outputs.json';
 
 import { generateClient } from 'aws-amplify/data';
 import { useState } from 'react';
+import { type Schema } from '../amplify/data/resource'
 
 export default function Page() {
   const client = generateClient<Schema>({

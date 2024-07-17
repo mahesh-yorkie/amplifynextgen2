@@ -8,7 +8,7 @@ import awsExports from '../amplify_outputs.json';
 Amplify.configure(awsExports);
 
 
-const inter = Inter({ subsets: ["latin"] ,className:"container" });
+//const inter = Inter({ subsets: ["latin"] ,className:"container" });
 
 // export const metadata: Metadata = {
 //   title: "Create Next App",
@@ -30,7 +30,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className="container">{children}</body>
     </html>
   );
 }

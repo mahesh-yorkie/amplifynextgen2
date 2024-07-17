@@ -1,7 +1,7 @@
 import { defineFunction ,secret} from '@aws-amplify/backend';
 
 
-const API_ENDPOINT: string | undefined = process.env.ENV;
+const API_ENDPOINT: string = process.env.ENV || 'default_endpoint';
 
 
 

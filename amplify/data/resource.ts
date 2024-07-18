@@ -1,17 +1,17 @@
-import { type ClientSchema, a, defineData } from '@aws-amplify/backend';
-import { CompanyModel }     from './Company.model'
-import { PlanFeatureModel } from './PlanFeature.model'
-import { SubscriptionPlanModel }     from './SubscriptionPlan.model'
-import { PlanFeatureSubscriptionPlanModel }     from './PlanFeatureSubscriptionPlan.model'
-import { UserModel }     from './User.model'
-import { UserSubscriptionHistoryModel }     from './UserSubscriptionHistory.model'
-import { UserNotificationModel }     from './UserNotification.model'
-import { CountryModel }     from './Country.model'
-import { StateModel }     from './State.model'
-import { CityModel }     from './City.model'
-import { PoolServiceModel }     from './PoolService.model'
-import { PoolServiceLocationModel }     from './PoolServiceLocation.model'
-import { createMember } from "../functions/create-member/resource"
+import { type ClientSchema, a, defineData } from "@aws-amplify/backend";
+import { CompanyModel } from "./Company.model";
+import { PlanFeatureModel } from "./PlanFeature.model";
+import { SubscriptionPlanModel } from "./SubscriptionPlan.model";
+import { PlanFeatureSubscriptionPlanModel } from "./PlanFeatureSubscriptionPlan.model";
+import { UserModel } from "./User.model";
+import { UserSubscriptionHistoryModel } from "./UserSubscriptionHistory.model";
+import { UserNotificationModel } from "./UserNotification.model";
+import { CountryModel } from "./Country.model";
+import { StateModel } from "./State.model";
+import { CityModel } from "./City.model";
+import { PoolServiceModel } from "./PoolService.model";
+import { PoolServiceLocationModel } from "./PoolServiceLocation.model";
+import { createMember } from "../functions/create-member/resource";
 
 /*== STEP 1 ===============================================================
 The section below creates a Todo database table with a "content" field. Try
@@ -20,18 +20,18 @@ specifies that any unauthenticated user can "create", "read", "update",
 and "delete" any "Todo" records.
 =========================================================================*/
 const schema = a.schema({
-  Company             :   CompanyModel,
-  PlanFeature         :   PlanFeatureModel,
-  SubscriptionPlan    :   SubscriptionPlanModel,
-  PlanFeatureSubscriptionPlan    :   PlanFeatureSubscriptionPlanModel,
-  User                :   UserModel,
-  UserSubscriptionHistory :   UserSubscriptionHistoryModel,
-  UserNotification    :   UserNotificationModel,
-  Country             :   CountryModel,
-  State               :   StateModel,
-  City                :   CityModel,
-  PoolService         :   PoolServiceModel,
-  PoolServiceLocation :   PoolServiceLocationModel,
+  Company: CompanyModel,
+  PlanFeature: PlanFeatureModel,
+  SubscriptionPlan: SubscriptionPlanModel,
+  PlanFeatureSubscriptionPlan: PlanFeatureSubscriptionPlanModel,
+  User: UserModel,
+  UserSubscriptionHistory: UserSubscriptionHistoryModel,
+  UserNotification: UserNotificationModel,
+  Country: CountryModel,
+  State: StateModel,
+  City: CityModel,
+  PoolService: PoolServiceModel,
+  PoolServiceLocation: PoolServiceLocationModel,
   responce: a.customType({
     statusCode: a.integer(),
     body: a.string(),
@@ -40,13 +40,13 @@ const schema = a.schema({
     .mutation()
     .arguments({
       name: a.string(),
-      email : a.string(),
-      user_pool_id : a.string(),
+      email: a.string(),
+      user_pool_id: a.string(),
+      userGroupList: a.string().array(),
     })
-    .returns(a.ref('responce'))
+    .returns(a.ref("responce"))
     .handler(a.handler.function(createMember))
-    .authorization(allow => [allow.authenticated()]),
-  
+    .authorization((allow) => [allow.authenticated()]),
 });
 
 export type Schema = ClientSchema<typeof schema>;

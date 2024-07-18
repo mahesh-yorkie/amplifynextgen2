@@ -1,12 +1,11 @@
-import { defineAuth } from '@aws-amplify/backend';
+import { defineAuth } from "@aws-amplify/backend";
 import { customMessage } from "./custom-message/resource";
-import { createMember } from '../functions/create-member/resource';
+import { createMember } from "../functions/create-member/resource";
 
 /**
  * Define and configure your auth resource
  * @see https://docs.amplify.aws/gen2/build-a-backend/auth
  */
-
 
 export const auth = defineAuth({
   loginWith: {
@@ -16,6 +15,6 @@ export const auth = defineAuth({
     customMessage,
   },
   access: (allow) => [
-    allow.resource(createMember).to(["manageUsers"])
+    allow.resource(createMember).to(["manageUsers", "addUserToGroup"]),
   ],
 });

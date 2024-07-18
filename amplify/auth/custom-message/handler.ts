@@ -3,14 +3,15 @@ import type { CustomMessageTriggerHandler } from "aws-lambda";
 export const handler: CustomMessageTriggerHandler = async (event) => {
   console.log(event);
   const ENVIRONMENT: string | undefined = process.env.ENV;
+  const FRONT_URL: string | undefined = process.env.FRONT_URL;
 
-  let REDIRECTURL = "http://localhost:3007/";
+  let REDIRECTURL: string | undefined = "http://localhost:3007/";
   if (ENVIRONMENT == "dev") {
     //REDIRECTURL = "http://localhost:3007/auth/reset-password"
   } else if (ENVIRONMENT == "stage") {
-    ///REDIRECTURL = ""
+    if (!FRONT_URL) REDIRECTURL = FRONT_URL;
   } else if (ENVIRONMENT == "prod") {
-    //REDIRECTURL = ""
+    if (!FRONT_URL) REDIRECTURL = FRONT_URL;
   }
 
   if (event.triggerSource === "CustomMessage_ForgotPassword") {

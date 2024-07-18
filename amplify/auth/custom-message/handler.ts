@@ -10,9 +10,9 @@ export const handler: CustomMessageTriggerHandler = async (event) => {
   if (ENVIRONMENT == "dev") {
     //REDIRECTURL = "http://localhost:3007/auth/reset-password"
   } else if (ENVIRONMENT == "stage") {
-    if (!FRONT_URL) REDIRECTURL = FRONT_URL;
+    if (FRONT_URL) REDIRECTURL = FRONT_URL;
   } else if (ENVIRONMENT == "prod") {
-    if (!FRONT_URL) REDIRECTURL = FRONT_URL;
+    if (FRONT_URL) REDIRECTURL = FRONT_URL;
   }
 
   if (event.triggerSource === "CustomMessage_ForgotPassword") {

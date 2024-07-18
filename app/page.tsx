@@ -4,7 +4,7 @@ import "@aws-amplify/ui-react/styles.css";
 import awsExports from "../amplify_outputs.json";
 
 import { generateClient } from "aws-amplify/data";
-import { useState } from "react";
+import { ChangeEvent, useState, FormEvent } from "react";
 import { type Schema } from "../amplify/data/resource";
 
 export default function Page() {
@@ -12,41 +12,50 @@ export default function Page() {
     authMode: "userPool",
   });
 
-  const [formData, setFormData] = useState({
+  interface FormData {
+    email: string;
+    username: string;
+    companyName: string;
+    roles: string[];
+  }
+
+  const [formData, setFormData] = useState<FormData>({
     email: "",
     username: "",
     companyName: "",
     roles: [],
   });
 
-  const handleChangeUserCreate = (e) => {
-    const { name, value } = e.target;
+  const handleChangeUserCreate = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value, selectedOptions } = e.target as HTMLInputElement &
+      HTMLSelectElement;
+
     if (name === "roles") {
       const selectedRoles = Array.from(
-        e.target.selectedOptions,
+        selectedOptions,
         (option) => option.value
       );
-      setFormData({
-        ...formData,
+      setFormData((prevFormData) => ({
+        ...prevFormData,
         roles: selectedRoles,
-      });
+      }));
     } else {
-      setFormData({
-        ...formData,
+      setFormData((prevFormData) => ({
+        ...prevFormData,
         [name]: value,
-      });
+      }));
     }
   };
 
   const [data, setData] = useState(null);
   const [errors, setErrors] = useState(null);
 
-  const handleSubmitCreateUser = async (e) => {
+  const handleSubmitCreateUser = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Handle form submission logic here
     console.log("Form submitted:", formData);
 
-    // Example of submitting data to an API endpoint
     try {
       const response: any = await client.mutations.crearteUser({
         name: "hello",
@@ -54,33 +63,55 @@ export default function Page() {
         user_pool_id: awsExports.auth.user_pool_id,
         userGroupList: formData.roles,
       });
-      //setData(response.data);
+
       console.log(response.data);
-      const userResponce: any = JSON.parse(response.data.body);
-      console.log("userResponce", userResponce);
+
+      const userResponse = JSON.parse(response.data.body);
+      console.log("userResponse", userResponse);
+
       if (response.data.statusCode === 200) {
-        const { errors: any, data: newCompany } =
+        const { errors: companyErrors, data: newCompany } =
           await client.models.Company.create({
             name: formData.companyName,
           });
 
-        console.log("newCompany", newCompany);
+        if (companyErrors) {
+          console.error("Company creation errors:", companyErrors);
+          return;
+        }
 
-        const { errors, data: newUser } = await client.models.User.create({
-          name: formData.username,
-          email: formData.email,
-          companyId: newCompany.id,
-          id: userResponce.Username,
-          userGroupList: formData.roles,
-        });
+        if (!newCompany || !newCompany.id) {
+          throw new Error("Invalid new company response");
+        }
 
-        console.log("newUser", newUser);
+        if (companyErrors) {
+          // handle company creation errors here
+          console.error("Company creation errors:", companyErrors);
+          return;
+        } else if (newCompany) {
+          console.log("newCompany", newCompany);
+
+          const { errors: userErrors, data: newUser } =
+            await client.models.User.create({
+              name: formData.username,
+              email: formData.email,
+              companyId: newCompany.id,
+              id: userResponse.Username,
+              userGroupList: formData.roles,
+            });
+
+          if (userErrors) {
+            // handle user creation errors here
+            console.error("User creation errors:", userErrors);
+            return;
+          }
+
+          console.log("newUser", newUser);
+        }
       }
-
-      //setErrors(response.errors);
     } catch (error) {
-      console.error("Error liking post:", error);
-      //setErrors([error]);
+      console.error("Error creating user:", error);
+      // handle the error appropriately, maybe set errors in the state to display in the UI
     }
   };
 

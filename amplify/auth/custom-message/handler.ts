@@ -1,11 +1,12 @@
 import type { CustomMessageTriggerHandler } from "aws-lambda";
+import { env } from "$amplify/env/custom-message"; // the import is '$amplify/env/<function name>'
 
 export const handler: CustomMessageTriggerHandler = async (event) => {
   console.log(event);
-  const ENVIRONMENT: string | undefined = process.env.ENV;
-  const FRONT_URL: string | undefined = process.env.FRONT_URL;
+  const ENVIRONMENT: string | undefined = env.ENVIRONMENT;
+  const FRONT_URL: string | undefined = env.FRONT_URL;
 
-  let REDIRECTURL: string | undefined = "http://localhost:3007/";
+  let REDIRECTURL: string | undefined = ENVIRONMENT;
   if (ENVIRONMENT == "dev") {
     //REDIRECTURL = "http://localhost:3007/auth/reset-password"
   } else if (ENVIRONMENT == "stage") {

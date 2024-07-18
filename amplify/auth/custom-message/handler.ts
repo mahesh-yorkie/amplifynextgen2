@@ -6,7 +6,7 @@ export const handler: CustomMessageTriggerHandler = async (event) => {
   const ENVIRONMENT: string | undefined = env.ENVIRONMENT;
   const FRONT_URL: string | undefined = env.FRONT_URL;
 
-  let REDIRECTURL: string | undefined = ENVIRONMENT;
+  let REDIRECTURL: string | undefined = FRONT_URL;
   if (ENVIRONMENT == "dev") {
     //REDIRECTURL = "http://localhost:3007/auth/reset-password"
   } else if (ENVIRONMENT == "stage") {

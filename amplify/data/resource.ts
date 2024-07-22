@@ -19,35 +19,37 @@ adding a new "isDone" field as a boolean. The authorization rule below
 specifies that any unauthenticated user can "create", "read", "update", 
 and "delete" any "Todo" records.
 =========================================================================*/
-const schema = a.schema({
-  Company: CompanyModel,
-  PlanFeature: PlanFeatureModel,
-  SubscriptionPlan: SubscriptionPlanModel,
-  PlanFeatureSubscriptionPlan: PlanFeatureSubscriptionPlanModel,
-  User: UserModel,
-  UserSubscriptionHistory: UserSubscriptionHistoryModel,
-  UserNotification: UserNotificationModel,
-  Country: CountryModel,
-  State: StateModel,
-  City: CityModel,
-  PoolService: PoolServiceModel,
-  PoolServiceLocation: PoolServiceLocationModel,
-  responce: a.customType({
-    statusCode: a.integer(),
-    body: a.string(),
-  }),
-  crearteUser: a
-    .mutation()
-    .arguments({
-      name: a.string(),
-      email: a.string(),
-      user_pool_id: a.string(),
-      userGroupList: a.string().array(),
-    })
-    .returns(a.ref("responce"))
-    .handler(a.handler.function(createMember))
-    .authorization((allow) => [allow.authenticated()]),
-});
+const schema = a
+  .schema({
+    Company: CompanyModel,
+    PlanFeature: PlanFeatureModel,
+    SubscriptionPlan: SubscriptionPlanModel,
+    PlanFeatureSubscriptionPlan: PlanFeatureSubscriptionPlanModel,
+    User: UserModel,
+    UserSubscriptionHistory: UserSubscriptionHistoryModel,
+    UserNotification: UserNotificationModel,
+    Country: CountryModel,
+    State: StateModel,
+    City: CityModel,
+    PoolService: PoolServiceModel,
+    PoolServiceLocation: PoolServiceLocationModel,
+    responce: a.customType({
+      statusCode: a.integer(),
+      body: a.string(),
+    }),
+    crearteUser: a
+      .mutation()
+      .arguments({
+        name: a.string(),
+        email: a.string(),
+        user_pool_id: a.string(),
+        userGroupList: a.string().array(),
+      })
+      .returns(a.ref("responce"))
+      .handler(a.handler.function(createMember))
+      .authorization((allow) => [allow.authenticated()]),
+  })
+  .authorization((allow) => [allow.resource(createMember)]);
 
 export type Schema = ClientSchema<typeof schema>;
 export const data = defineData({

@@ -1,11 +1,19 @@
-import { defineStorage } from '@aws-amplify/backend';
+import { defineFunction, defineStorage } from "@aws-amplify/backend";
 
 export const storage = defineStorage({
-  name: 'amplifyGen2practice',
+  name: "currentpools",
   access: (allow) => ({
-    'profile-pictures/{user_id}/*': [
-      allow.guest.to(['read']),
-      allow.entity('identity').to(['read', 'write', 'delete'])
-    ]
-  })
+    "profile-pictures/{user_id}/*": [
+      allow.guest.to(["read"]),
+      allow.authenticated.to(["read", "write", "delete"]),
+    ],
+  }),
+  triggers: {
+    onUpload: defineFunction({
+      entry: "./on-upload-handler.ts",
+    }),
+    onDelete: defineFunction({
+      entry: "./on-delete-handler.ts",
+    }),
+  },
 });

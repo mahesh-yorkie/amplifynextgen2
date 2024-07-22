@@ -2,10 +2,14 @@
 import { Authenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import awsExports from "../amplify_outputs.json";
+import country from "../country.json";
 
 import { generateClient } from "aws-amplify/data";
 import { ChangeEvent, useState, FormEvent } from "react";
 import { type Schema } from "../amplify/data/resource";
+
+import { StorageManager } from "@aws-amplify/ui-react-storage";
+import "@aws-amplify/ui-react/styles.css";
 
 export default function Page() {
   const client = generateClient<Schema>({
@@ -115,6 +119,52 @@ export default function Page() {
     }
   };
 
+  const importCountyHandler = async () => {
+    try {
+      console.log(country);
+
+      const countryResponse = await client.models.Country.create({
+        name: country.name,
+      });
+
+      if (countryResponse.data && countryResponse.data.id) {
+        console.log(countryResponse.data);
+
+        const statePromises = country.states.map(async (state) => {
+          const stateResponse = await client.models.State.create({
+            name: state.name,
+            countryId: countryResponse.data.id,
+          });
+
+          if (stateResponse.data && stateResponse.data.id) {
+            console.log(stateResponse.data);
+
+            const cityPromises = state.cities.map(async (city) => {
+              const cityResponse = await client.models.City.create({
+                name: city.name,
+                stateId: stateResponse.data.id,
+              });
+
+              if (cityResponse.data) {
+                console.log(cityResponse.data);
+              }
+
+              return cityResponse;
+            });
+
+            await Promise.all(cityPromises);
+          }
+
+          return stateResponse;
+        });
+
+        await Promise.all(statePromises);
+      }
+    } catch (error) {
+      console.error("Error importing country data:", error);
+    }
+  };
+
   return (
     <Authenticator>
       {({ signOut, user }) => (
@@ -194,6 +244,16 @@ export default function Page() {
               <button className="btn btn-success" onClick={signOut}>
                 Sign out
               </button>
+              <button className="btn btn-success" onClick={importCountyHandler}>
+                Import us country state and city
+              </button>
+
+              <StorageManager
+                acceptedFileTypes={["image/*"]}
+                path="profile-pictures/1234556/photo.png"
+                maxFileCount={1}
+                isResumable
+              />
             </div>
           </div>
         </main>

@@ -14,6 +14,7 @@ export const auth = defineAuth({
   triggers: {
     customMessage,
   },
+  groups: ['SUPERADMIN','ADMIN','WORKER','CUSTOMER'],
   access: (allow) => [
     allow.resource(createMember).to(["manageUsers", "addUserToGroup"]),
   ],

@@ -1,5 +1,4 @@
 import { a } from "@aws-amplify/backend";
-import { stat } from "fs";
 
 export const UserModel = a
   .model({

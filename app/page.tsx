@@ -123,43 +123,43 @@ export default function Page() {
     try {
       console.log(country);
 
-      const countryResponse = await client.models.Country.create({
-        name: country.name,
-      });
+      // const countryResponse = await client.models.Country.create({
+      //   name: country.name,
+      // });
 
-      if (countryResponse.data && countryResponse.data.id) {
-        console.log(countryResponse.data);
+      // if (countryResponse.data && countryResponse.data.id) {
+      //   console.log(countryResponse.data);
 
-        const statePromises = country.states.map(async (state) => {
-          const stateResponse = await client.models.State.create({
-            name: state.name,
-            countryId: countryResponse.data.id,
-          });
+      //   const statePromises = country.states.map(async (state) => {
+      //     const stateResponse = await client.models.State.create({
+      //       name: state.name,
+      //       countryId: countryResponse.data.id,
+      //     });
 
-          if (stateResponse.data && stateResponse.data.id) {
-            console.log(stateResponse.data);
+      //     if (stateResponse.data && stateResponse.data.id) {
+      //       console.log(stateResponse.data);
 
-            const cityPromises = state.cities.map(async (city) => {
-              const cityResponse = await client.models.City.create({
-                name: city.name,
-                stateId: stateResponse.data.id,
-              });
+      //       const cityPromises = state.cities.map(async (city) => {
+      //         const cityResponse = await client.models.City.create({
+      //           name: city.name,
+      //           stateId: stateResponse.data.id,
+      //         });
 
-              if (cityResponse.data) {
-                console.log(cityResponse.data);
-              }
+      //         if (cityResponse.data) {
+      //           console.log(cityResponse.data);
+      //         }
 
-              return cityResponse;
-            });
+      //         return cityResponse;
+      //       });
 
-            await Promise.all(cityPromises);
-          }
+      //       await Promise.all(cityPromises);
+      //     }
 
-          return stateResponse;
-        });
+      //     return stateResponse;
+      //   });
 
-        await Promise.all(statePromises);
-      }
+      //   await Promise.all(statePromises);
+      // }
     } catch (error) {
       console.error("Error importing country data:", error);
     }
